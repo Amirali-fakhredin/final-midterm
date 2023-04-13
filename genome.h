@@ -19,4 +19,3 @@ public:
     string readGeneDNA0();
     string readGeneDNA1();
 };
-
