@@ -2,11 +2,11 @@
 using namespace std;
 #include "genome.h"
 
-void genome::getGene(string rna) {
+void genome::getGene(string rna) { //get gen
 	DNA[0] = rna;
 	DNA[1] = rna;
 	RNA = rna;
-	for (unsigned int i = 0; i < rna.size(); i++)
+	for (unsigned int i = 0; i < rna.size(); i++) //compilite
 	{
 		if (rna[i] == 'T')
 			DNA[1][i] = 'A';
@@ -18,7 +18,7 @@ void genome::getGene(string rna) {
 			DNA[1][i] = 'C';
 	}
 }
-void genome::createDnaFromRna(string rna) {
+void genome::createDnaFromRna(string rna) { //create DNA from RNA
 	string dna[2];
 	dna[0] = rna;
 	dna[1] = rna;
@@ -36,7 +36,7 @@ void genome::createDnaFromRna(string rna) {
 	}
 	cout << "\tnew created DNA is: " << dna[0] << " " << dna[1];
 }
-void genome::smallMutateRnaDna(char a, char c, int n) {
+void genome::smallMutateRnaDna(char a, char c, int n) { //small mutate
 	int nCount = 0;
 	for (unsigned int i = 0; i < RNA.size()&& nCount<n; i++)
 	{
@@ -65,7 +65,7 @@ void genome::smallMutateRnaDna(char a, char c, int n) {
 		}
 	}	
 }
-void genome::replaceSubStr(string& s, string s1, string s2)
+void genome::replaceSubStr(string& s, string s1, string s2) //replace substr
 {
 	bool replaced = false;
 	string ans = "";
@@ -93,7 +93,7 @@ void genome::replaceSubStr(string& s, string s1, string s2)
 	}
 	s = ans;
 }
-void genome::bigMutate(string st1, string st2) {
+void genome::bigMutate(string st1, string st2) { //big mutate
 	replaceSubStr(RNA, st1, st2);
 	DNA[0] = RNA;
 	DNA[1] = RNA;
@@ -109,7 +109,7 @@ void genome::bigMutate(string st1, string st2) {
 			DNA[1][i] = 'C';
 	}
 }
-void genome::reverseMutate(string st1) {
+void genome::reverseMutate(string st1) { //reverse
 	string st2 = st1;
 	int len = st1.length();
 	for (int i = 0; i < len; i++)
