@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -296,16 +294,22 @@ int main()
 		{
 			if (allVirus.size() < 1)
 				cout << "\n\tfirst enter at least one virus";
+			if (animals.size() < 1)
+				cout << "\n\tfirst enter at least one animal";
 			else
 			{
+				int a1;
+				cout << "\tenter animal number : ";
+				cin >> a1;
 				int v1;
 				cout << "\tenter virus number : ";
-				cin >> v1;
-				if (allVirus[v1 - 1].CheckHarmfulVirus() == true)
-				{
-					cout << "\n\tthis virus is harmful..";
-					allVirus[v1 - 1].print();
-				}
+				cin >> v1;		
+				vector <string> strings = animals[a1 - 1].geneList();
+				if (allVirus[v1 - 1].CheckHarmfulVirus(strings) == true)
+					cout << "\n\tthis virus is harmful..";				
+				else
+					cout << "\n\tthis virus is not harmful..";
+				allVirus[v1 - 1].print();
 			}
 		}
 
