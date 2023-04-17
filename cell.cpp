@@ -14,34 +14,39 @@ void cell::getCromozome(int cromozomes) {
 	}
 }
 void cell::cellDie() {
-	int point = 0,AT=0,GC=0;
-	for (int i = 0; i < DNA[0].length(); i++)
-	{
-		if (
-			(DNA[0][i] == 'A' && DNA[1][i] != 'T')
+	for (int j = 0; j < cromozomeCount; j++){
+		string DNA0 = gene[j].readGeneDNA0();
+		string DNA1 = gene[j].readGeneDNA1();
+		int point = 0, AT = 0, GC = 0;
+		for (int i = 0; i < DNA[0].length(); i++){
+			if (
+			(DNA0[i] == 'A' && DNA1[i] != 'T')
 			||
-			(DNA[0][i] == 'T' && DNA[1][i] != 'A')
+			(DNA0[i] == 'T' && DNA1[i] != 'A')
 			||
-			(DNA[0][i] == 'G' && DNA[1][i] != 'C')
+			(DNA0[i] == 'G' && DNA1[i] != 'C')
 			||
-			(DNA[0][i] == 'C' && DNA[1][i] != 'G')
+			(DNA0[i] == 'C' && DNA1[i] != 'G')
 			)
-			point++;
+				point++;
 
-		if ((DNA[0][i] == 'A' && DNA[1][i] == 'T')
+			if ((DNA0[i] == 'A' && DNA1[i] == 'T')
 			||
-			(DNA[0][i] == 'T' && DNA[1][i] == 'A'))
-			AT++;
+			(DNA0[i] == 'T' && DNA1[i] == 'A'))
+				AT++;
 
-		if ((DNA[0][i] == 'G' && DNA[1][i] == 'C')
+			if ((DNA0[i] == 'G' && DNA1[i] == 'C')
 			||
-			(DNA[0][i] == 'C' && DNA[1][i] == 'G'))
-			GC++;
+			(DNA0[i] == 'C' && DNA1[i] == 'G'))
+				GC++;
+		}
 	}
+	
 	if (point > 5 || AT > 3 * GC)
 	{
 		cout << "\n\tCell died..";
 		delete this;//????
+		break;
 	}
 	else
 	{
@@ -62,29 +67,12 @@ void cell::bigMutate(string str1, int n, string str2, int m) {
 	gene[m-1].getGene(s2);
 }
 void cell::smallMutate(char a, char c, int n, int m) {
-	string s1, s2;
-	int indexA=-1,indexC=-1;
-	s1 = gene[n - 1].readGeneRNA();
-	s2 = gene[m - 1].readGeneRNA();
-	for (int i = 0; i < s1.length(); i++)
-		if (s1[i] == a)
-		{
-			indexA = i;
-			break;
-		}
-	for (int i = 0; i < s2.length(); i++)
-		if (s2[i] == c)
-		{
-			indexC = i;
-			break;
-		}
-	if(indexA>=0)
-		s1[indexA] = c;
-	if (indexC >= 0)
-		s2[indexC] = a;
-
-	gene[n - 1].getGene(s1);
-	gene[m - 1].getGene(s2);
+	string s2 = gene[m - 1].readGeneRNA();
+    for(int i = 0; i < n; i++){
+        int f = s2.find("a");
+        s2[f] = 'c'; 
+    }
+    gene[m - 1].getGene(s2);
 }
 void cell::reverseMutate(string st1, int n) {
 	string s1;
